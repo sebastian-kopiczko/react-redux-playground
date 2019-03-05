@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ListItem from './ListItem/ListItem';
+import PostItem from './PostItem/PostItem';
 
-class List extends Component {
+class PostList extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -27,10 +27,10 @@ class List extends Component {
       return <div>Fetching data...</div>
     } 
     return (
-        <ul>
-          { posts.map(post => ( <ListItem key={post.id} title={post.title} body={post.body}/>)) }
-        </ul>
+        <div className="mt-5">
+          { posts.map(post => ( <PostItem key={post.id} title={post.title} body={post.body}/>)) }
+        </div>
     )
   }
 }
-export default List
+export default PostList
