@@ -21,6 +21,14 @@ class PostList extends Component {
       });
   }
 
+  deletePost = id => {
+    const { posts } = this.state;
+    const newPosts = posts.filter(post => post.id !== id);
+    this.setState({
+      posts: newPosts
+    })
+  };
+
   render() {
     const { posts, isLoaded } = this.state;
     // setTimeout(() => console.table(posts), 1500);
@@ -30,7 +38,12 @@ class PostList extends Component {
     return (
       <div className="mt-5">
         {posts.map(post => (
-          <PostItem key={post.id} title={post.title} body={post.body} />
+          <PostItem
+            key={post.id}
+            title={post.title}
+            body={post.body}
+            deleteClickHandler={this.deletePost.bind(this, post.id)}
+          />
         ))}
       </div>
     );
