@@ -25,6 +25,7 @@ class PostList extends Component {
             {posts.map(post => (
               <PostItem
                 key={post.id}
+                id={post.id}
                 title={post.title}
                 body={post.body}
               />

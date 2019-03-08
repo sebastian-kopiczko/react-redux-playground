@@ -9,7 +9,11 @@ class PostItem extends Component {
     };
   }
 
-  onDeleteClick = () => {};
+  onDeleteClick = (id, dispatch) => {
+    dispatch({type: 'DELETE_CONTACT', payload: id});
+  };
+
+  // onAddClick = dispatch => dispatch({type: 'ADD_POST', payload: })
 
   render() {
     const { id, title, body } = this.props;
@@ -18,12 +22,13 @@ class PostItem extends Component {
     return (
       <Consumer>
         { value => {
+          const { dispatch } = value;
           return (
-            <div key={id} className="post">
+            <div className="post">
               <button
                 type="button"
                 className="btn btn-outline-danger btn-sm"
-                onClick={this.onDeleteClick}
+                onClick={this.onDeleteClick.bind(this, id, dispatch)}
               >
                 Delete post
               </button>
