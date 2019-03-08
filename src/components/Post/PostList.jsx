@@ -27,7 +27,6 @@ class PostList extends Component {
                 key={post.id}
                 title={post.title}
                 body={post.body}
-                deleteClickHandler={this.deletePost.bind(this, post.id)}
               />
             ))}
           </div>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Consumer } from "../../../context";
 
 class PostItem extends Component {
   constructor(props) {
@@ -8,31 +9,36 @@ class PostItem extends Component {
     };
   }
 
-  onDeleteClick = () => {
-    this.props.deleteClickHandler();
-  };
+  onDeleteClick = () => {};
 
   render() {
     const { id, title, body } = this.props;
     const { showPostBody } = this.state;
-    return (
-      <div key={id} className="post">
-        <button
-          type="button"
-          className="btn btn-outline-danger btn-sm"
-          onClick={this.onDeleteClick}
-        >
-          Delete post
-        </button>
 
-        <h2
-          className="post__title"
-          onClick={() => this.setState({ showPostBody: !showPostBody })}
-        >
-          {title}
-        </h2>
-        {showPostBody ? <p>{body}</p> : null}
-      </div>
+    return (
+      <Consumer>
+        { value => {
+          return (
+            <div key={id} className="post">
+              <button
+                type="button"
+                className="btn btn-outline-danger btn-sm"
+                onClick={this.onDeleteClick}
+              >
+                Delete post
+              </button>
+
+              <h2
+                className="post__title"
+                onClick={() => this.setState({ showPostBody: !showPostBody })}
+              >
+                {title}
+              </h2>
+              {showPostBody ? <p>{body}</p> : null}
+            </div>
+          );
+        }}
+      </Consumer>
     );
   }
 }
