@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PostItem from "./PostItem/PostItem";
-import { Consumer } from '../../context';
+import { Consumer } from '../../../context';
 
 class PostList extends Component {
   deletePost = id => {
@@ -17,6 +17,12 @@ class PostList extends Component {
       <Consumer>
         { value => {
           const { posts, isLoaded } = value;
+          // const x = posts[1];
+          // console.log('1' + JSON.stringify(x));
+          // // const y = x.id;
+          // if (typeof(x == 'undefined')){
+          //   console.log('123')
+          // }
           if (!isLoaded) {
             return <div>Fetching data...</div>;
           }

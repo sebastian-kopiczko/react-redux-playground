@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import "./styles/AppContainer.css";
-import Header from "../Header/Header.jsx";
-import PostList from "../Post/PostList.jsx";
+
+import AddPost from "../posts/Post/AddPost.jsx"
+import Header from "../layout/Header/Header.jsx";
+import PostList from "../posts/Post/PostList.jsx";
 import Form from "../Form/Form";
+
 import { appTitle } from "../../constants/settings";
+import "./styles/AppContainer.css";
+
 
 class AppContainer extends Component {
   render() {
@@ -13,13 +17,19 @@ class AppContainer extends Component {
           <Header appTitle={appTitle} />
         </div>
         <div className="row">
-          <div className="col">
+          {/* <div className="col">
             <h3>Posts list</h3>
             <PostList />
-          </div>
+          </div> */}
           <div className="col">
-            <Form />
+            <AddPost />
           </div>
+          {/* <div className="col">
+            <Form />
+          </div> */}
+        </div>
+        <div className="row">
+          <PostList />
         </div>
       </div>
     );
