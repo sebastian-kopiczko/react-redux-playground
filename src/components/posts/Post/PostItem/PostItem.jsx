@@ -37,7 +37,7 @@ class PostItem extends Component {
                 className="post__title"
                 onClick={() => this.setState({ showPostBody: !showPostBody })}
               >
-                {title}
+                {title}, {id}
               </h2>
               {showPostBody ? <p>{body}</p> : null}
             </div>

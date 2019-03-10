@@ -16,16 +16,8 @@ class PostList extends Component {
     return (
       <Consumer>
         { value => {
-          const { posts, isLoaded } = value;
-          // const x = posts[1];
-          // console.log('1' + JSON.stringify(x));
-          // // const y = x.id;
-          // if (typeof(x == 'undefined')){
-          //   console.log('123')
-          // }
-          if (!isLoaded) {
-            return <div>Fetching data...</div>;
-          }
+          const { posts } = value;
+
           return (
           <div className="mt-5">
             {posts.map(post => (

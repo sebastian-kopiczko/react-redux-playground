@@ -11,11 +11,11 @@ const reducer = (state, action) => {
           posts => posts.id !== action.payload
         )
       };
-    // case "ADD_CONTACT":
-    //   return {
-    //     ...state,
-    //     posts: [ ...state, action.payload ]
-    //   };
+    case "ADD_CONTACT":
+      return {
+        ...state,
+        posts: [ action.payload, ...state.posts ]
+      };
     default:
       return state;
   }
@@ -23,21 +23,16 @@ const reducer = (state, action) => {
 
 export class Provider extends Component {
   state = {
-    posts: [],
-    isLoaded: false,
+    posts: [
+      {
+        title: 'title 1',
+        body: 'body 1',
+        id: 'id-0'
+      }
+    ],
     dispatch: action => this.setState(state => reducer(state, action))
   };
 
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          posts: json,
-          isLoaded: true
-        });
-      });
-  }
   render() {
     return (
       <Context.Provider value={this.state}>
