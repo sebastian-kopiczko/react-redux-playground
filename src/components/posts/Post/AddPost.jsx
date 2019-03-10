@@ -8,13 +8,23 @@ class AddPost extends Component {
   state = {
     title: "",
     body: "",
-    id: ""
+    id: "",
+    errors: {}
   };
 
   onSubmit = (dispatch, e) => {
     e.preventDefault();
 
     const { title, body } = this.state;
+    if(title===''){
+      this.setState({errors: {title: 'title is required'}})
+      return;
+    }
+    if(body===''){
+      this.setState({errors: {body: 'title is required'}})
+      return;
+    }
+
     const newPost = {
       title,
       body,
@@ -26,14 +36,15 @@ class AddPost extends Component {
     this.setState({
       title: '',
       body: '',
-      id: ''
+      id: '',
+      errors: {}
     })
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })
 
   render() {
-    const { title, body } = this.state;
+    const { title, body, errors } = this.state;
 
     return (
       <Consumer>
@@ -50,6 +61,7 @@ class AddPost extends Component {
                     placeholder="instert title"
                     value={title}
                     onChange={this.onChange}
+                    error={errors.title}
                   />
                   <TextInputGroup 
                     label="Body"
@@ -57,6 +69,7 @@ class AddPost extends Component {
                     placeholder="instert content"
                     value={body}
                     onChange={this.onChange}
+                    error={errors.body}
                   />
                   <input
                     type="submit"
