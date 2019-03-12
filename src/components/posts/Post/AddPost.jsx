@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Consumer } from "../../../context";
 import TextInputGroup from "../../layout/TextInputGroup/TextInputGroup";
 
 import newId from "../../../newId";
@@ -12,7 +11,7 @@ class AddPost extends Component {
     errors: {}
   };
 
-  onSubmit = (dispatch, e) => {
+  onSubmit = e => {
     e.preventDefault();
 
     const { title, body } = this.state;
@@ -48,41 +47,34 @@ class AddPost extends Component {
     const { title, body, errors } = this.state;
 
     return (
-      <Consumer>
-        {value => {
-          const { dispatch } = value;
-          return (
-            <div className="card mb-2">
-              <div className="card-header">Add post</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Title"
-                    name="title"
-                    placeholder="instert title"
-                    value={title}
-                    onChange={this.onChange}
-                    error={errors.title}
-                  />
-                  <TextInputGroup
-                    label="Body"
-                    name="body"
-                    placeholder="instert content"
-                    value={body}
-                    onChange={this.onChange}
-                    error={errors.body}
-                  />
-                  <input
-                    type="submit"
-                    defaultValue="Add post"
-                    className="btn btn-sm btn-block btn-outline-success"
-                  />
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+      <div className="card mb-2">
+        <div className="card-header">Add post</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <TextInputGroup
+              label="Title"
+              name="title"
+              placeholder="instert title"
+              value={title}
+              onChange={this.onChange}
+              error={errors.title}
+            />
+            <TextInputGroup
+              label="Body"
+              name="body"
+              placeholder="instert content"
+              value={body}
+              onChange={this.onChange}
+              error={errors.body}
+            />
+            <input
+              type="submit"
+              defaultValue="Add post"
+              className="btn btn-sm btn-block btn-outline-success"
+            />
+          </form>
+        </div>
+      </div>
     );
   }
 }
