@@ -1,53 +1,43 @@
 import React, { Component } from "react";
-import { Consumer } from "../../../../context";
+import PropTypes from "prop-types";
 
 class PostItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showPostBody: true
-    };
-  }
-
-  onDeleteClick = (id, dispatch) => {
-    dispatch({type: 'DELETE_CONTACT', payload: id});
+  state = {
+    showPostBody: true
   };
 
-  // onAddClick = dispatch => dispatch({type: 'ADD_POST', payload: })
+  onDeleteClick = id => {
+    // delete post
+  };
 
   render() {
-    const { id, title, body } = this.props;
+    const { id, title, body } = this.props.post;
     const { showPostBody } = this.state;
 
     return (
-      <Consumer>
-        { value => {
-          const { dispatch } = value;
-          return (
-            <div className="post">
-              <button
-                type="button"
-                className="btn btn-outline-danger btn-sm"
-                onClick={this.onDeleteClick.bind(this, id, dispatch)}
-              >
-                Delete post
-              </button>
+      <div className="post">
+        <button
+          type="button"
+          className="btn btn-outline-danger btn-sm"
+          onClick={() => this.onDeleteClick(id)}
+        >
+          Delete post
+        </button>
 
-              <h2
-                className="post__title"
-                onClick={() => this.setState({ showPostBody: !showPostBody })}
-              >
-                {title}, {id}
-              </h2>
-              {showPostBody ? <p>{body}</p> : null}
-            </div>
-          );
-        }}
-      </Consumer>
+        <h2
+          className="post__title"
+          onClick={() => this.setState({ showPostBody: !showPostBody })}
+        >
+          {title}, {id}
+        </h2>
+        {showPostBody ? <p>{body}</p> : null}
+      </div>
     );
   }
 }
 
-// todo PropTypes
+PostItem.propTypes = {
+  post: PropTypes.object.isRequired
+};
 
 export default PostItem;

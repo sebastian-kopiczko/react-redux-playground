@@ -1,38 +1,19 @@
 import React, { Component } from "react";
 import PostItem from "./PostItem/PostItem";
-import { Consumer } from '../../../context';
 
 class PostList extends Component {
-  deletePost = id => {
-    const { posts } = this.state;
-    // wyfiltruj post z id do usuniecia
-    const newPosts = posts.filter(post => post.id !== id);
-    this.setState({
-      posts: newPosts
-    })
-  };
-
   render() {
+    const { posts } = this.state;
     return (
-      <Consumer>
-        { value => {
-          const { posts } = value;
-
-          return (
-          <div className="mt-5">
-            {posts.map(post => (
-              <PostItem
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                body={post.body}
-              />
-            ))}
-          </div>
-          )
-        }}
-      </Consumer>
-    )
+      <React.Fragment>
+        <h2>Posts list</h2>
+        <div className="mt-5">
+          {posts.map(post => (
+            <PostItem key={post.id} post={post} />
+          ))}
+        </div>
+      </React.Fragment>
+    );
   }
 }
 export default PostList;

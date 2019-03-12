@@ -2,20 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Header = props => {
-  const { appTitle } = props;
+  const { title } = props;
   return (
     <div>
-      <h1>{appTitle}</h1>
+      <h1>{title}</h1>
     </div>
   );
 };
 
 Header.defaultProps = {
-  appTitle: "my app"
+  title: "my app"
 };
 
 Header.propTypes = {
-  appTitle: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default Header;

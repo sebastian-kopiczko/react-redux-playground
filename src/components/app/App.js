@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import AppContainer from "./AppContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,9 +9,7 @@ class App extends Component {
   render() {
     return (
       <Provider>
-        <div className="container">
-          <AppContainer />
-        </div>
+        <AppContainer />
       </Provider>
     );
   }
