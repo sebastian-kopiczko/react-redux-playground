@@ -1,6 +1,6 @@
-let lastId = 0;
+let lastId = 2;
 
-export default function(prefix='id-') {
+export default () => {
   lastId++;
-  return `${prefix}${lastId}`;
+  return lastId;
 }

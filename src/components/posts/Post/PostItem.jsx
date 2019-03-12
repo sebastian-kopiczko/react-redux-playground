@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { connect } from 'react-redux'
+import { deletePost } from "../../../actions/postActions";
+
+
 class PostItem extends Component {
   state = {
     showPostBody: true
   };
 
   onDeleteClick = id => {
-    // delete post
+    this.props.deletePost(id);
   };
 
   render() {
@@ -28,7 +32,7 @@ class PostItem extends Component {
           className="post__title"
           onClick={() => this.setState({ showPostBody: !showPostBody })}
         >
-          {title}, {id}
+          {title}, id: {id}
         </h2>
         {showPostBody ? <p>{body}</p> : null}
       </div>
@@ -37,7 +41,8 @@ class PostItem extends Component {
 }
 
 PostItem.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
 
-export default PostItem;
+export default connect(null, { deletePost })(PostItem); //no mapStateToProps

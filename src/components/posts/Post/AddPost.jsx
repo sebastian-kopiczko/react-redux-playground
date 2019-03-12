@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import TextInputGroup from "../../layout/TextInputGroup/TextInputGroup";
+import PropTypes from 'prop-types'
+
+import { connect } from "react-redux"
+import { addPost } from "../../../actions/postActions"
 
 import newId from "../../../newId";
 
@@ -13,7 +17,6 @@ class AddPost extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const { title, body } = this.state;
 
     if (title === "") {
@@ -31,7 +34,7 @@ class AddPost extends Component {
       id: newId()
     }; // to samo co title: title, body: body /\
 
-    // submit post
+    this.props.addPost(newPost); //submitting new post
 
     this.setState({
       title: "",
@@ -50,7 +53,7 @@ class AddPost extends Component {
       <div className="card mb-2">
         <div className="card-header">Add post</div>
         <div className="card-body">
-          <form onSubmit={this.onSubmit.bind(this)}>
+          <form onSubmit={this.onSubmit}>
             <TextInputGroup
               label="Title"
               name="title"
@@ -79,4 +82,8 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost;
+AddPost.propTypes = {
+  addPost: PropTypes.func.isRequired
+}
+
+export default connect(null, { addPost })(AddPost);
